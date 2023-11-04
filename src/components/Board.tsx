@@ -1,4 +1,4 @@
-import Square from "./Square";
+import Square from "@components/Square";
 import calculateWinner from '@utils/calculateWinner.util'
 
 function Board({
