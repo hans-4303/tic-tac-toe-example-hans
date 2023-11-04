@@ -44,3 +44,12 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## CRA + Paths Alias Issue
+CRA로 작성한 프로젝트는 tsconfig.json의 path를 초기화하는 문제가 있을 수 있음
+
+1. npm i @craco/craco
+2. npm install --save-dev react-app-alias
+3. tsconfig.paths.json 형성(경로 외 주석은 달면 안 됨)
+4. craco.config.js 작성
+5. package.json의 react-script 명령어 -> craco 명령어: start: react-script start -> start: craco start
