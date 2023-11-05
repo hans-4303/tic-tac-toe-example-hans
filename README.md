@@ -53,3 +53,8 @@ CRA로 작성한 프로젝트는 tsconfig.json의 path를 초기화하는 문제
 3. tsconfig.paths.json 형성(경로 외 주석은 달면 안 됨)
 4. craco.config.js 작성
 5. package.json의 react-script 명령어 -> craco 명령어: start: react-script start -> start: craco start
+
+## babel 관련
+레거시 설치로 임시 해결함, 물론 패키지는 레거시라 다른 방도 찾아야 할 것
+
+**npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps**
