@@ -44,13 +44,51 @@ function Board({
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
+  const length = Math.sqrt(squares.length);
+
+  // 1. 불변성이 깨지지만 작성은 한 사례
+  const testBoard = [];
+  for (let i = 0; i < length; i++) {
+    const testRow = [];
+    for (let j = 0; j < length; j++) {
+      testRow.push(
+        <Square
+          value={squares[3 * i + j]}
+          onSquareClick={() => handleClick(3 * i + j)}
+          key={3 * i + j}
+        />
+      );
+    }
+    testBoard.push(
+      <div className="board-row" key={i}>
+        {testRow}
+      </div>
+    );
+  }
+
+  // 2. Array.from 으로 작성해서 불변성은 지키는 사례, Array.from 확인해보기
+  const testBoard1 = Array.from({ length }, (_, i) => {
+    const testRow1 = Array.from({ length }, (_, j) => (
+      <Square
+        value={squares[3 * i + j]}
+        onSquareClick={() => handleClick(3 * i + j)}
+        key={3 * i + j}
+      />
+    ));
+    return (
+      <div className="board-row" key={i}>
+        {testRow1}
+      </div>
+    );
+  });
+
   return (
     <>
       {/* 게임 진행 상황 렌더링 */}
       <div className="status">{status}</div>
       {/* Square 컴포넌트 호출 및 props 대입
       onSquareClick prop으로 handleClick 메서드 전달하면 하위 컴포넌트가 사용하는 방식 */}
-      <div className="board-row">
+      {/* <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
         <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
@@ -64,7 +102,27 @@ function Board({
         <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
+      </div> */}
+
+      {/* 3. 불변성은 지키고 return 문에서 표현식으로 작성한 사례 */}
+      {Array(length)
+        .fill(null)
+        .map((_, i) => {
+          const row = Array(length)
+            .fill(null)
+            .map((_, j) => (
+              <Square
+                value={squares[3 * i + j]}
+                onSquareClick={() => handleClick(3 * i + j)}
+                key={3 * i + j}
+              />
+            ));
+          return (
+            <div className="board-row" key={i}>
+              {row}
+            </div>
+          );
+        })}
     </>
   );
 }
