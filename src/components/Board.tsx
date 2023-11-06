@@ -82,6 +82,26 @@ function Board({
     );
   });
 
+  // 4. return 이전에 변수를 선언하고 사용하기
+  const testBoard2 = Array(length)
+    .fill(null)
+    .map((_, i) => {
+      const row = Array(length)
+        .fill(null)
+        .map((_, j) => (
+          <Square
+            value={squares[3 * i + j]}
+            onSquareClick={() => handleClick(3 * i + j)}
+            key={3 * i + j}
+          />
+        ));
+      return (
+        <div className="board-row" key={i}>
+          {row}
+        </div>
+      );
+    });
+
   return (
     <>
       {/* 게임 진행 상황 렌더링 */}
@@ -105,7 +125,7 @@ function Board({
       </div> */}
 
       {/* 3. 불변성은 지키고 return 문에서 표현식으로 작성한 사례 */}
-      {Array(length)
+      {/* {Array(length)
         .fill(null)
         .map((_, i) => {
           const row = Array(length)
@@ -122,7 +142,8 @@ function Board({
               {row}
             </div>
           );
-        })}
+        })} */}
+      {testBoard2}
     </>
   );
 }
