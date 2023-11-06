@@ -41,7 +41,11 @@ function App() {
     /* 렌더링 되는 ui */
     return (
       <li key={index}>
-        <button onClick={() => jumpTo(index)}>{description}</button>
+        {index !== currentMove ? (
+          <button onClick={() => jumpTo(index)}>{description}</button>
+        ) : (
+          <span>You are at move {currentMove}</span>
+        )}
       </li>
     );
   });
