@@ -56,8 +56,10 @@ function Board({
   /* 게임 상태 선언 */
   let status;
   /* 승자 계산 함수의 반환 값 있는지 따져서 승자 표시하거나 다음 차례 나타내기 */
-  if (winner) {
+  if (winner && winner !== "draw") {
     status = "Winner: " + winner;
+  } else if (winner && winner === "draw") {
+    status = "It's a " + winner;
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }

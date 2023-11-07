@@ -24,6 +24,11 @@ function calculateWinner(squares: any[]) {
         /* lines === [0, 1, 2] || [3, 4, 5], ... */
         lines: [a, b, c],
       };
+    } else if (!squares.includes(null)) {
+      return {
+        winner: "draw",
+        lines: null
+      };
     }
   }
   return null;
