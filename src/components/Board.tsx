@@ -13,10 +13,13 @@ function Board({
   xIsNext: boolean;
   /* square, onPlay는 특이점 없음 */
   squares: any[];
+  /* Q5. onPlay 함수에 또 다른 파라미터가 들어오게 됨 */
   onPlay: (nextSquares: any[], coordinateSquare: number[]) => void;
 }) {
   /* 인덱스를 받는 클릭 함수 */
   function handleClick(index: number) {
+    /* Q5. 클릭한 칸을 좌표로 동작시키기
+    먼저는 Square 클릭마다 작동해야 하므로 handleClick 함수를 업데이트 함, 좌표 배열 추가 */
     const locations = [
       /* row 1 */
       [1, 1],
@@ -45,6 +48,7 @@ function Board({
       nextSquares[index] = "O";
     }
     /* onPlay === handlePlay 함수에 nextSquares(게임 상황) 전달하기 */
+    /* Q5. App으로 부터 받아오는 onPlay에 또 다른 인수를 추가하게 됨 */
     onPlay(nextSquares, locations[index]);
   }
 

@@ -14,16 +14,16 @@ function App() {
   const currentSquares: any[] = history[currentMove];
   /* Q3. 턴을 거꾸로 정렬하기 위한 state */
   const [ascending, setAscending] = useState<boolean>(false);
-  /* Q5. 좌표를 기록하기 위한 state */
+  /* Q5. 좌표를 기록하기 위한 state 추가, 숫자가 들어갈 수 있는 2차원 배열임 */
   const [movesCoordinates, setMovesCoordinates] = useState<number[][]>([]);
 
-  /* squares는 any[] 형태 */
+  /* squares는 any[] 형태, Q5: 이제 두 번째 파라미터를 받음, 형태는 number[]이고 이차원 배열 반환 */
   function handlePlay(nextSquares: any[], coordinateSquare: number[]) {
     /* history 배열을 스프레드하고 slice, 0번째부터 currentMove까지만 반환하고 nextSquares를 이어주기 */
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     /* [...history.slice(0, currentMove + 1) == any[], nextSquares == any[]] 이므로 불변성 유지됐음, setState 호출 및 대입 */
     setHistory(nextHistory);
-    /* Q5. 좌표 기록하기 */
+    /* Q5. 좌표 기록하기, ...prevState, coordinateSquare로 불변성 유지하기 */
     setMovesCoordinates((prevState) => [...prevState, coordinateSquare]);
     /* 내역 길이 - 1로 setState, 즉 턴수를 나타냄 */
     setCurrentMove(nextHistory.length - 1);
