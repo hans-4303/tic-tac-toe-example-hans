@@ -102,6 +102,26 @@ function Board({
       );
     });
 
+  // 5. 배열을 Array(length).fill(null)로 선언
+  const testBoard3 = Array(length).fill(null);
+  // map 메서드는 별도로 실행하는 케이스: 초기 배열 불변성 지켜짐, 아는 한 가장 좋겠음
+  const renderBoard3 = testBoard3.map((_, i) => {
+    const row = Array(length)
+      .fill(null)
+      .map((_, j) => (
+        <Square
+          value={squares[3 * i + j]}
+          onSquareClick={() => handleClick(3 * i + j)}
+          key={3 * i + j}
+        />
+      ));
+    return (
+      <div className="board-row" key={i}>
+        {row}
+      </div>
+    );
+  });
+
   return (
     <>
       {/* 게임 진행 상황 렌더링 */}
@@ -143,7 +163,7 @@ function Board({
             </div>
           );
         })} */}
-      {testBoard2}
+      {renderBoard3}
     </>
   );
 }
