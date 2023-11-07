@@ -15,10 +15,15 @@ function calculateWinner(squares: any[]) {
   for (let i = 0; i < lines.length; i++) {
     /* 순회하는 배열 요소를 각각 a, b, c로 분해 */
     const [a, b, c] = lines[i];
-    /* squares[a]값을 따지고, squares[a]가 존재하며 squares[b]가 존재하고, squares[c]와 같다면 */
+    /* squares[a]가 존재하며 squares[b] 및 squares[c]와 동시에 값이 "X" || "O"로 같은 경우 승리 판정 */
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      /* squares[a]를 반환함 */
-      return squares[a];
+      /* 적정 값을 뽑아 쓸 수 있게 객체 형태로 리턴 */
+      return {
+        /* squares[a] === "X" || "O" */
+        winner: squares[a],
+        /* lines === [0, 1, 2] || [3, 4, 5], ... */
+        lines: [a, b, c],
+      };
     }
   }
   return null;
