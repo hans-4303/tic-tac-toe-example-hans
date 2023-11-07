@@ -59,6 +59,7 @@ function Board({
   if (winner && winner !== "draw") {
     status = "Winner: " + winner;
   } else if (winner && winner === "draw") {
+    /* draw를 인지하고 작성하기 */
     status = "It's a " + winner;
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");

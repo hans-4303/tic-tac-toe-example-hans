@@ -25,9 +25,11 @@ function calculateWinner(squares: any[]) {
         lines: [a, b, c],
       };
     } else if (!squares.includes(null)) {
+      /* if문이 성립했다면 게임 결과 났을 것이지만 그렇지 않으므로 else if 호출
+      squares 모든 요소가 null을 포함하지 않는다(X 혹은 O로 모든 값이 채워짐)할 때 winner에 "draw" 텍스트를, lines에 null 반환 */
       return {
         winner: "draw",
-        lines: null
+        lines: null,
       };
     }
   }

@@ -15,6 +15,7 @@ function Square({
     /* 각 버튼들이 함수를 받고 값을 출력 */
     <button
       className={
+        /* 조건부 렌더링을 하고 있으니까 null 경우가 생겨도 문제 없음 */
         winningLines && winningLines.includes(squareIndex)
           ? "square-win"
           : "square"
