@@ -14,13 +14,17 @@ function App() {
   const currentSquares: any[] = history[currentMove];
   /* Q3. 턴을 거꾸로 정렬하기 위한 state */
   const [ascending, setAscending] = useState<boolean>(false);
+  /* Q5. 좌표를 기록하기 위한 state */
+  const [movesCoordinates, setMovesCoordinates] = useState<number[][]>([]);
 
   /* squares는 any[] 형태 */
-  function handlePlay(nextSquares: any[]) {
+  function handlePlay(nextSquares: any[], coordinateSquare: number[]) {
     /* history 배열을 스프레드하고 slice, 0번째부터 currentMove까지만 반환하고 nextSquares를 이어주기 */
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     /* [...history.slice(0, currentMove + 1) == any[], nextSquares == any[]] 이므로 불변성 유지됐음, setState 호출 및 대입 */
     setHistory(nextHistory);
+    /* Q5. 좌표 기록하기 */
+    setMovesCoordinates((prevState) => [...prevState, coordinateSquare]);
     /* 내역 길이 - 1로 setState, 즉 턴수를 나타냄 */
     setCurrentMove(nextHistory.length - 1);
   }
@@ -42,7 +46,13 @@ function App() {
     let description;
     /* 인덱스가 0보다 크다면(== 턴수로 이동하고 싶다면) */
     if (index > 0) {
-      description = "Go to move #" + index;
+      description =
+        "Go to move #" +
+        index +
+        " Col: " +
+        movesCoordinates[index - 1][0] +
+        " Row: " +
+        movesCoordinates[index - 1][1];
     } /* 인덱스가 0 이하라면(== 게임 초기화와 같다) */ else {
       description = "Go to game start";
     }

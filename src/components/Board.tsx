@@ -13,10 +13,25 @@ function Board({
   xIsNext: boolean;
   /* square, onPlay는 특이점 없음 */
   squares: any[];
-  onPlay: (nextSquares: any[]) => void;
+  onPlay: (nextSquares: any[], coordinateSquare: number[]) => void;
 }) {
   /* 인덱스를 받는 클릭 함수 */
   function handleClick(index: number) {
+    const locations = [
+      /* row 1 */
+      [1, 1],
+      [2, 1],
+      [3, 1],
+      /* row 2 */
+      [1, 2],
+      [2, 2],
+      [3, 2],
+      /* row 3 */
+      [1, 3],
+      [2, 3],
+      [3, 3],
+    ];
+
     /* 만약 승자 로직 값이 있거나 squares[index]가 있다면 리턴으로 나오기 */
     if (calculateWinner(squares) || squares[index]) {
       return;
@@ -30,7 +45,7 @@ function Board({
       nextSquares[index] = "O";
     }
     /* onPlay === handlePlay 함수에 nextSquares(게임 상황) 전달하기 */
-    onPlay(nextSquares);
+    onPlay(nextSquares, locations[index]);
   }
 
   /* 승자 계산 함수의 반환 값(squares[a] | null) 다루기 */
