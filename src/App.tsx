@@ -12,6 +12,8 @@ function App() {
   const xIsNext: boolean = currentMove % 2 === 0;
   /* history 중 특정 인덱스에 접근하므로 역시 any[] 처리 */
   const currentSquares: any[] = history[currentMove];
+  /* Q3. 턴을 거꾸로 정렬하기 위한 state */
+  const [ascending, setAscending] = useState<boolean>(false);
 
   /* squares는 any[] 형태 */
   function handlePlay(nextSquares: any[]) {
@@ -22,6 +24,12 @@ function App() {
     /* 내역 길이 - 1로 setState, 즉 턴수를 나타냄 */
     setCurrentMove(nextHistory.length - 1);
   }
+
+  const reverseButton = (
+    <button onClick={() => setAscending((prevState) => !prevState)}>
+      sort turn to reverse
+    </button>
+  );
 
   /* 내역 버튼에 해당하는 함수, 파라미터로 숫자를 받은 뒤 해당 턴수로 이동함 */
   function jumpTo(nextMove: number) {
@@ -57,8 +65,10 @@ function App() {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        {/* moves 컴포넌트 배열 호출, 그런데 왜 적용한 것인지는 모르겠음 */}
-        <ol>{moves}</ol>
+        {/* Q3. 턴 정렬 위한 버튼 */}
+        {reverseButton}
+        {/* Q3. 조건부 렌더링에 따른 턴 버튼 정렬, 단 반전을 처리한다면 [...moves]로 처리해 불변성 지키는 게 좋았음 */}
+        <ol>{!ascending ? moves : [...moves].reverse()}</ol>
       </div>
     </div>
   );
